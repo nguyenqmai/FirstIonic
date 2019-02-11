@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 
+import { FcmService } from '../services/fcm.service';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -14,4 +16,8 @@ import { Tab3Page } from './tab3.page';
   ],
   declarations: [Tab3Page]
 })
-export class Tab3PageModule {}
+export class Tab3PageModule {
+  constructor(
+    private fcm: FcmService
+  ) {}
+}

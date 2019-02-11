@@ -1,47 +1,68 @@
 import { Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
-import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmService {
+  private currentToken: string = null;
 
   constructor(private firebase: Firebase,
-    private afs: AngularFirestore,
-    private platform: Platform) {}
-
-  async getToken() {
-    let token;
-
-    if (this.platform.is('android')) {
-      token = await this.firebase.getToken();
+    private platform: Platform) {
+      this.setup();
     }
 
-    if (this.platform.is('ios')) {
-      token = await this.firebase.getToken();
-      await this.firebase.grantPermission();
+    private setup() {
+      console.log("calling fcmService setup ")
+      this.firebase.onTokenRefresh().subscribe(newToken => {
+        if (this.platform.is('ios')) {
+          // need to open a modal and ask for granting permission
+          // this.firebase.grantPermission();
+          console.log("Is iOS platform ")
+        }
+        console.log("got token " + newToken)
+      })
     }
 
-    console.log("got token " + token)
-    this.saveToken(token);
-  }
+    public getCurrentToken() {
+      return this.currentToken;
+    }
 
-  private saveToken(token) {
-    if (!token) return;
+    public subscribeToTopic(topic: string) {
+      // if (this.currentToken == null) {
+      //   console.log("subscribeToTopic: this.currentToken is null")
+      //   return; // should show a modal of issue
+      // }
 
-    const devicesRef = this.afs.collection('devices');
+      this.firebase.subscribe(topic).then(good => {
+        console.log("subscribeToTopic: good " + good)
+      }, 
+      bad => {
+        console.log("subscribeToTopic: bad " + bad)
+      })
+    }
 
-    const data = {
-      token,
-      userId: 'testUserId'
-    };
+    
+    public unsubscribeFromTopic(topic: string) {
+      this.firebase.unsubscribe(topic).then(good => {
+        console.log("unsubscribeFromTopic: good " + good)
+      }, 
+      bad => {
+        console.log("unsubscribeFromTopic: bad " + bad)
+      })
+    }
 
-    return devicesRef.doc(token).set(data);
-  }
+    // public clearAllNotifications() {
+    //   if (this.currentToken == null) {
+    //     return; // should show a modal of issue
+    //   }
+    //   this.firebase.().then(good => {}, bad => {})
+    // }
 
-  onNotifications() {
-    return this.firebase.onNotificationOpen();
-  }
+
+    public onNotificationOpen() {
+      return this.firebase.onNotificationOpen();
+    }
+
 }
