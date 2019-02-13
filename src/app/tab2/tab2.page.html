@@ -1,26 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label>Pepperoni</ion-label>
-      <ion-checkbox slot="end" value="pepperoni" checked></ion-checkbox>
-    </ion-item>
+    <ion-toolbar>
+      <ion-title>
+        Settings
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   
-    <ion-item>
-      <ion-label>Sausage</ion-label>
-      <ion-checkbox slot="end" value="sausage" disabled></ion-checkbox>
-    </ion-item>
+  <ion-content>
+    <ion-list lines="full">
   
-    <ion-item>
-      <ion-label>Mushrooms</ion-label>
-      <ion-checkbox slot="end" value="mushrooms"></ion-checkbox>
-    </ion-item>
-  </ion-list>
-</ion-content>
+      <ion-item>
+        <ion-button expand="full" fill="solid" (click)="saveSubscriptions()">Save all changes</ion-button>
+      </ion-item>
+  
+      <ion-item-group *ngFor="let group of getTopicGroups()">
+          <ion-item-divider (click)="tongleGroupExpansion(group)">
+            <ion-icon slot="start" [name]="group.expanded ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+            <ion-label>{{group.name}}</ion-label>
+            <ion-badge margin-end slot="end" color="primary">{{group.name.length}}</ion-badge>
+            <!-- <ion-checkbox slot="end" color="primary" [(ngModel)]="group.status" (ionChange)="checkboxGroupClicked(group)"></ion-checkbox> -->
+            <!-- <ion-toggle slot="end" color="primary" [(ngModel)]="group.status" (ionChange)="checkboxGroupClicked(group)"></ion-toggle> -->
+          </ion-item-divider>
+  
+          <div *ngIf="group.expanded">
+          <ion-item  *ngFor="let item of group.subItems">
+            <ion-label padding-start margin-start>{{item.name}}</ion-label>
+            <ion-badge margin-end slot="end" color="secondary">{{item.name.length}}</ion-badge>
+            <!-- <ion-checkbox  margin-end slot="end" color="secondary" [(ngModel)]="item.status" (ionChange)="checkboxItemClicked(group, item)"></ion-checkbox> -->
+            <!-- <ion-toggle margin-end slot="end" color="secondary" [(ngModel)]="item.status" (ionChange)="checkboxItemClicked(group, item)"></ion-toggle> -->
+          </ion-item>
+          </div>
+      </ion-item-group>
+  
+    </ion-list>
+  
+  
+  </ion-content>
+  

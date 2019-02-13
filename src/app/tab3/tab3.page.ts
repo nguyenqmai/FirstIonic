@@ -14,6 +14,7 @@ export class Tab3Page {
       name:'Tin nhan chung cua nha tho', 
       topicId: 'MainGroup01',
       status:true, 
+      expanded: false,
       subItems:[ 
         {
           name:'Tin nhan nha tho 01', 
@@ -36,6 +37,7 @@ export class Tab3Page {
       name:'Tin nhan chung cua TNTT', 
       topicId: 'MainGroup02',
       status:false, 
+      expanded: false,
       subItems:[ 
         {
           name:'Tin nhan cua TNTT 01', 
@@ -75,12 +77,26 @@ export class Tab3Page {
     }
   }
 
+  public tongleGroupExpansion(parentGroup: any) {
+    parentGroup.expanded = !parentGroup.expanded;
+  }
+
   public checkboxGroupClicked(parentGroup: any) {
     console.log("checkbox name " + parentGroup.name)
-    for(let item of parentGroup.subItems) {
-      item.status = parentGroup.status
-      console.log("sub-item status " + item.status)
-    }
+    // if (parentGroup.status) {
+      for(let item of parentGroup.subItems) {
+        item.status = parentGroup.status
+        console.log("sub-item status " + item.status)
+      }
+    // } 
+    // else { 
+    //   for(let item of parentGroup.subItems) {
+    //     if (!item.status)
+    //       return;
+    //   }
+    //   parentGroup.status = true;
+    //   return;
+    // }
   }
 
   public checkboxItemClicked(parentGroup: any, item: any) {
