@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { FcmService } from '../services/fcm.service';
+import { FcmService } from '../../services/fcm.service';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-setting',
+  templateUrl: 'setting.page.html',
+  styleUrls: ['setting.page.scss']
 })
 
 
-export class Tab3Page {
+export class SettingPage {
   private groups = [ 
     {
       name:'Tin nhan chung cua nha tho', 

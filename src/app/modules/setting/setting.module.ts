@@ -3,15 +3,21 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { SettingPage } from './setting.page';
+
+import { FcmService } from '../../services/fcm.service';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: Tab1Page }])
+    RouterModule.forChild([{ path: '', component: SettingPage }])
   ],
-  declarations: [Tab1Page]
+  declarations: [SettingPage]
 })
-export class Tab1PageModule {}
+export class SettingPageModule {
+  constructor(
+    private fcm: FcmService
+  ) {}
+}

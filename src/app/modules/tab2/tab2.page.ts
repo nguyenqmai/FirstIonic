@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FcmService } from '../services/fcm.service';
+import { NavController, NavParams } from '@ionic/angular';
+import { FcmService } from '../../services/fcm.service';
 
 @Component({
   selector: 'app-tab2',
@@ -55,6 +56,12 @@ export class Tab2Page {
           status:false,   
         }
       ]
+    },
+    {
+      name:'Tin nhan chung', 
+      topicId: 'MainGroup03',
+      status:false, 
+      expanded: false,
     }
   ];
 
@@ -63,18 +70,6 @@ export class Tab2Page {
 
   public getTopicGroups() {
     return this.groups;
-  }
-
-  public saveSubscriptions() {
-    for (let group of this.groups) {
-      for (let item of group.subItems) {
-        if (!item.status)
-          continue;
-          
-        console.log("subscribing to topic " + item.topicId)
-        this.fcm.subscribeToTopic(item.topicId);
-      }
-    }
   }
 
   public tongleGroupExpansion(parentGroup: any) {
@@ -88,25 +83,9 @@ export class Tab2Page {
         item.status = parentGroup.status
         console.log("sub-item status " + item.status)
       }
-    // } 
-    // else { 
-    //   for(let item of parentGroup.subItems) {
-    //     if (!item.status)
-    //       return;
-    //   }
-    //   parentGroup.status = true;
-    //   return;
-    // }
   }
 
-  public checkboxItemClicked(parentGroup: any, item: any) {
-    console.log("group name " + parentGroup.name + " checkbox name " + item.name)
-    let tmp = true;
-    for(let sitem of parentGroup.subItems) {
-      tmp = tmp && sitem.status
-      console.log("sub-item name " + sitem.name + " sub-item status " + sitem.status + " new group status " +tmp)
-    }
-    parentGroup.status = tmp
-  }
+  public showNotifications() {
 
+  }
 }

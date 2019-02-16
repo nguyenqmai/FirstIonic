@@ -9,20 +9,22 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
+import { AbcComponent } from './components/abc/abc.component';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
 
 
 @NgModule({
-  declarations: [AppComponent, ExpandableComponent],
+  declarations: [AppComponent, ExpandableComponent, AbcComponent,],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Firebase,
+
   ],
   bootstrap: [AppComponent]
 })
