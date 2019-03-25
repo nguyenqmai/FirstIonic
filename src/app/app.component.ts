@@ -40,7 +40,7 @@ export class AppComponent {
       message,
       position: "top",
       showCloseButton: true,
-      duration: 3000
+      duration: 10000
     });
     toast.present();
   }
