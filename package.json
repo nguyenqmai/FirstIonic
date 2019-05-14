@@ -10,9 +10,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "android_build": "ionic cordova build android --prod",
-    "android_run": "ionic cordova run android --prod --device",
-    "android_emulate": "ionic cordova emulate android --prod",
+    "android_build": "ionic cordova clean build android --prod",
+    "android_run": "ionic cordova clean run android --prod --device",
+    "android_emulate": "ionic cordova clean emulate android --prod",
     "adb_log": "adb logcat"
   },
   "private": true,

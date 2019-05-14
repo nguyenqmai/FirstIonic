@@ -1,8 +1,8 @@
-import { Component, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
+import {Component, ElementRef, Input, Renderer, ViewChild} from '@angular/core';
 
 @Component({
-  selector: 'expandable',
-  templateUrl: 'expandable.component.html'
+    selector: 'expandable',
+    templateUrl: 'expandable.component.html'
 })
 export class ExpandableComponent {
 
@@ -14,8 +14,8 @@ export class ExpandableComponent {
 
     }
 
-    ngAfterViewInit(){
-        this.renderer.setElementStyle(this.expandWrapper.nativeElement, 'height', this.expandHeight + 'px');    
+    ngAfterViewInit() {
+        this.renderer.setElementStyle(this.expandWrapper.nativeElement, 'height', this.expandHeight + 'px');
     }
 
 }
